@@ -183,6 +183,42 @@ if (!function_exists('managerLogin')) {
                         $groups[$i++] = $row['documentgroup'];
                     }
                     $_SESSION['mgrDocgroups'] = $groups;
+
+                    // Login as Webuser with the same username too (if that user exists)
+                    $sql = "SELECT ATT.*, USR.*
+                        FROM $db.{$pre}web_user_attributes ATT
+                        INNER JOIN $db.{$pre}web_users USR ON ATT.internalKey = USR.id
+                        WHERE USR.username = '$usr_username';";
+                    $result = $modx->db->query($sql);
+                    $webuser = $modx->db->getRow($result);
+                    if ($webuser) {
+                        $_SESSION['webShortname'] = $webuser['username'];
+                        $_SESSION['webFullname'] = $webuser['fullname'];
+                        $_SESSION['webEmail'] = $webuser['email'];
+                        $_SESSION['webValidated'] = 1;
+                        $_SESSION['webInternalKey'] = $webuser['internalKey'];
+                        $_SESSION['webValid'] = base64_encode($form_password);
+                        $_SESSION['webUser'] = base64_encode($username);
+                        $_SESSION['webFailedlogins'] = $webuser['failedlogincount'];
+                        $_SESSION['webLastlogin'] = $webuser['lastlogin'];
+                        $_SESSION['webnrlogins'] = $webuser['logincount'];
+
+                        $sql = "SELECT access.documentgroup
+                                FROM $db.{$pre}web_groups groups
+                                INNER JOIN $db.{$pre}webgroup_access access ON access.webgroup = groups.webgroup
+                                WHERE groups.webuser =" . $webuser['internalKey'];
+                        $result = $modx->db->query($sql);
+                        while ($row = $modx->db->getRow($result, 'num'))
+                            $groups[$i++] = $row[0];
+                        $_SESSION['webDocgroups'] = $groups;
+
+                        $sql = "SELECT WGN.name
+                                FROM $db.{$pre}webgroup_names WGN
+                                INNER JOIN $db.{$pre}web_groups WG ON WG.webgroup = WGN.id AND WG.webuser = " . $webuser['internalKey'];
+                        $grpNames = $modx->db->getColumn("name", $sql);
+                        $_SESSION['webUserGroupNames'] = $grpNames;
+
+                        $_SESSION['webUsrConfigSet'] = array();
                     }
                 }
 
