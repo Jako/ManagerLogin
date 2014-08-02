@@ -1,0 +1,22 @@
+<div id="login_form">
+    [+ml.errors+]
+    <form method="post" action="[~[*id*]~]">
+        <input type="hidden" name="[+ml.action_name+]" value="[+ml.action_val+]"/>
+
+        <div class="field_box">
+            <label id="username_label" for="username">[+ml.user_lbl+]</label>
+            <input id="username" class="text" type="text" name="[+ml.user_fldname+]" value="[+ml.username+]"/>
+        </div>
+        <div class="field_box">
+            <label id="password_label" for="password">[+ml.passwd_lbl+]</label>
+            <input id="password" class="password" type="password" name="[+ml.passwd_fldname+]" value=""/>
+        </div>
+        <div class="field_box">
+            <input id="rememberme" class="checkbox" type="checkbox" name="[+ml.remember_fldname+]" value="1"/>
+            <label id="rememberme_label" for="rememberme">[+ml.remember_lbl+]</label>
+        </div>
+        <div class="submit_box">
+            <button type="submit">[+ml.login_lbl+]</button>
+        </div>
+    </form>
+</div>

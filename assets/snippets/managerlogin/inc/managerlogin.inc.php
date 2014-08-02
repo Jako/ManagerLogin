@@ -21,26 +21,26 @@ if (!function_exists('managerLogin')) {
 
         // Language
         $defaultLang = 'en';
-        include MANAGER_LOGIN_PATH . 'lang/' . $defaultLang . '.inc.php';
+        $_lang = '';
+        include MANAGER_LOGIN_BASE_PATH . 'lang/' . $defaultLang . '.inc.php';
         if (!empty($language) && ($language != $defaultLang)) {
-            $langFile = MANAGER_LOGIN_PATH . 'lang/' . $language . '.inc.php';
+            $langFile = MANAGER_LOGIN_BASE_PATH . 'lang/' . $language . '.inc.php';
             if (file_exists($langFile)) {
                 include $langFile;
             }
         }
 
         // Templates
-        include MANAGER_LOGIN_PATH . 'inc/templates.inc.php';
         if (empty($loginTpl)) {
-            $loginTpl = $defaultLoginTpl;
-            $modx->regClientCSS($defaultLoginCss);
+            $loginTpl = file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogin.template.html');
+            $modx->regClientCSS(file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogin.style.html'));
         }
         if (empty($loggedTpl)) {
-            $loggedTpl = $defaultLoggedTpl;
-            $modx->regClientCSS($defaultLoggedCss);
+            $loginTpl = file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogged.template.html');
+            $modx->regClientCSS(file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogged.style.html'));
         }
         if (empty($errorTpl)) {
-            $errorTpl = $defaultErrorTpl;
+            $loginTpl = file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultError.template.html');
         }
 
         ////////////////////////////////////////////////////////////////////////
@@ -183,7 +183,6 @@ if (!function_exists('managerLogin')) {
                         $groups[$i++] = $row['documentgroup'];
                     }
                     $_SESSION['mgrDocgroups'] = $groups;
-                    }
                 }
 
                 // invoke OnManagerLogin event
@@ -239,9 +238,9 @@ if (!function_exists('managerLogin')) {
             $html = $loggedTpl;
             $actionVal = 'logout';
 
-            $modx->setPlaceholder('ml.logged_msg', $_lang[logged_msg]);
-            $modx->setPlaceholder('ml.logout_lbl', $_lang[logout_text]);
-            $modx->setPlaceholder('ml.home_lbl', $_lang[home_text]);
+            $modx->setPlaceholder('ml.logged_msg', $_lang['logged_msg']);
+            $modx->setPlaceholder('ml.logout_lbl', $_lang['logout_text']);
+            $modx->setPlaceholder('ml.home_lbl', $_lang['home_text']);
         } else {
             $html = $loginTpl;
             $actionVal = 'login';
@@ -252,12 +251,12 @@ if (!function_exists('managerLogin')) {
             $modx->setPlaceholder('ml.errors', implode("\n", $errors));
 
             $modx->setPlaceholder('ml.user_fldname', 'username');
-            $modx->setPlaceholder('ml.user_lbl', $_lang[username]);
+            $modx->setPlaceholder('ml.user_lbl', $_lang['username']);
             $modx->setPlaceholder('ml.passwd_fldname', 'password');
-            $modx->setPlaceholder('ml.passwd_lbl', $_lang[password]);
+            $modx->setPlaceholder('ml.passwd_lbl', $_lang['password']);
             $modx->setPlaceholder('ml.remember_fldname', 'rememberme');
-            $modx->setPlaceholder('ml.remember_lbl', $_lang[remember_username]);
-            $modx->setPlaceholder('ml.login_lbl', $_lang[login_button]);
+            $modx->setPlaceholder('ml.remember_lbl', $_lang['remember_username']);
+            $modx->setPlaceholder('ml.login_lbl', $_lang['login_button']);
         }
 
         // Common placholders
@@ -294,4 +293,4 @@ if (!function_exists('managerLogin')) {
     }
 
 }
-?>
+
