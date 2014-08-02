@@ -3,6 +3,7 @@ History
 - 2.0.1 August 1, 2014
     - Update for MODX Evolution 1.0.10+
     - MODX PackageManager compatible
+    - External template files
 
 - 2.0 February 15, 2008
     - New version adding template and language parameters
