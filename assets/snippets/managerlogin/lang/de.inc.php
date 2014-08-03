@@ -20,4 +20,3 @@ $_lang['err_invalid_passwd'] = 'Passwort nicht korrekt.';
 $_lang['logged_msg'] = 'Sie sind schon angemeldet.';
 $_lang['logout_text'] = 'Abmelden';
 $_lang['home_text'] = 'Zurück zur Startseite';
-?>

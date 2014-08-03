@@ -20,4 +20,4 @@ $_lang['err_invalid_passwd'] = 'Mot de passe invalide.';
 $_lang['logged_msg'] = 'Vous êtes connecté.';
 $_lang['logout_text'] = 'Se déconnecter';
 $_lang['home_text'] = 'Retour à l\'accueil';
-?>
+

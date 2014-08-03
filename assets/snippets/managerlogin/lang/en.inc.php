@@ -20,4 +20,4 @@ $_lang['err_invalid_passwd'] = 'Invalid password.';
 $_lang['logged_msg'] = 'You are already logged in.';
 $_lang['logout_text'] = 'Logout';
 $_lang['home_text'] = 'Return to Homepage';
-?>
+
