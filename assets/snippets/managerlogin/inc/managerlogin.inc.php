@@ -36,7 +36,7 @@ if (!function_exists('managerLogin')) {
             $modx->regClientCSS(file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogin.style.html'));
         }
         if (empty($loggedTpl)) {
-            $loginTpl = file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogged.template.html');
+            $loggedTpl = file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogged.template.html');
             $modx->regClientCSS(file_get_contents(MANAGER_LOGIN_BASE_PATH . 'templates/defaultLogged.style.html'));
         }
         if (empty($errorTpl)) {
