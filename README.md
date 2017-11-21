@@ -1,4 +1,4 @@
-#THIS PROJECT IS DEPRECATED
+# THIS PROJECT IS DEPRECATED
 
 ManagerLogin is not maintained anymore. It maybe does not work in Evolution 1.1 anymore. Please fork it and bring it back to life, if you need it.
 
@@ -24,7 +24,7 @@ cssStyle | CSS style to add within the document <head> tag. Can be either a file
 
 Warning: When using directly HTML or CSS code for the parameters, it may not work because of MODx parser behaviour. For example, '=' is not supported.
 
-##Placeholders
+## Placeholders
 
 See default templates in templates.inc.php file for example usage.
 
